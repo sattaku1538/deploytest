@@ -1,14 +1,15 @@
-<!-- 追記１ここから -->
+<!-- index.phpメインの投稿の表示 -->
 <?php
-//DB接続情報を設定します。
+// データベースを接続する記述
 $pdo = new PDO(
     "mysql:dbname=sample;host=localhost","root","",array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET `utf8`")
 );
-//ここで「DB接続NG」だった場合、接続情報に誤りがあります。
+
+// データベースに接続確認の記述
 if ($pdo) {
-    echo "DB接続OK";
+    echo "データベース接続済み";
 } else {
-    echo "DB接続NG";
+    echo "データベース接続不可。接続を確認してください。";
 }
 //SQLを実行。
 $regist = $pdo->prepare("SELECT * FROM post");
@@ -20,30 +21,28 @@ if ($regist) {
     echo "登録失敗";
 }
 ?>
-<!-- 追記１ここまで -->
 
 <!DOCTYPE html>
 <meta charset="UTF-8">
-<title>掲示板サンプル</title>
-<h1>掲示板サンプル</h1>
+<title>大脱出スクール投稿掲示板</title>
+<h1>好きなことを書き込んでね</h1>
 <section>
     <h2>新規投稿</h2>
     <form action="send.php" method="post">
-        名前 : <input type="text" name="name" value=""><br>
+        ペンネーム : <input type="text" name="name" value=""><br>
         投稿内容: <input type="text" name="contents" value=""><br>
         <button type="submit">投稿</button>
     </form>
 </section>
  
-<!-- 追記２ここから -->
+
 <section>
 	<h2>投稿内容一覧</h2>
 		<?php foreach($regist as $loop):?>
 			<div>No：<?php echo $loop['id']?></div>
-			<div>名前：<?php echo $loop['name']?></div>
+			<div>ペンネーム：<?php echo $loop['name']?></div>
 			<div>投稿内容：<?php echo $loop['contents']?></div>
 			<div>------------------------------------------</div>
 		<?php endforeach;?>
 	
 </section>
-<!-- 追記２ここまで -->

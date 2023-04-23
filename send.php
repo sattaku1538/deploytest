@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
-<title>掲示板サンプル</title>
-<h1>掲示板サンプル</h1>
+<title>大脱出スクール投稿掲示板</title>
+<h1>好きなことを書き込んでね</h1>
 <section>
     <h2>投稿完了</h2>
     <button onclick="location.href='index.php'">戻る</button>
@@ -20,9 +20,9 @@ $pdo = new PDO(
 );
 //ここで「DB接続NG」だった場合、接続情報に誤りがあります。
 if ($pdo) {
-    echo "DB接続OK";
+    echo "データベース接続済み。";
 } else {
-    echo "DB接続NG";
+    echo "データベース接続不可。接続を確認をしてください。";
 }
 //SQLを実行。
 $regist = $pdo->prepare("INSERT INTO post(id, name, contents, created_at) VALUES (:id,:name,:contents,:created_at)");
